@@ -8,9 +8,9 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email">
-            Email
-          </label>
+          {/* <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="email">
+            Email Address
+          </label> */}
           <input
             type="email"
             id="email"
@@ -20,31 +20,17 @@ const Login = () => {
         </div>
         
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email">
-            Phone Number
-            <span className='text-xs text-blue-500 ml-1'>
-            (for call initiation when mining sessions end)
-          </span>
-          </label>
+          {/* <label className="block text-sm font-semibold text-gray-700 mb-2" htmlFor="password">
+            Password
+          </label> */}
           <input
-            type="email"
-            id="email"
+            type="password"
+            id="password"
             className="block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-200"
-            placeholder="Phone Number"
+            placeholder="Password"
           />
         </div>
         
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="telegram">
-            Telegram Username
-          </label>
-          <input
-            type="text"
-            id="telegram"
-            className="block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-200"
-            placeholder="Telegram Username"
-          />
-        </div>
         
         <div className="flex justify-center mt-2">
             <button className="w-[60%] bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200">
