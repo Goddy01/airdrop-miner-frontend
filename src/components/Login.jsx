@@ -53,7 +53,7 @@ const Login = () => {
         </div>
         
         <div className="mt-4 text-center">
-          <p className="text-sm">
+          <p className="text-sm font-semibold">
             OR
           </p>
           <div className="flex justify-center mt-2">
@@ -62,6 +62,9 @@ const Login = () => {
               Login with Telegram
             </button>
           </div>
+          <p className='text-sm my-2'>
+            Don't have an account? <a href="" className='text-blue-500 font-semibold'>Sign Up</a>
+            </p>
         </div>
       </div>
     </div>
