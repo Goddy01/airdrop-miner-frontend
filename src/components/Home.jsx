@@ -227,7 +227,7 @@ export default function Homepage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
       <nav className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-100 p-4 z-50">
         <div className="container mx-auto flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold text-yellow-400">Autodrop</a>
+          <a href="/" className="text-2xl font-bold text-yellow-400">DDrop</a>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-4 font-semibold">
@@ -401,7 +401,7 @@ export default function Homepage() {
       {/* Footer */}
       <footer className="bg-gray-900 bg-opacity-75 items-center p-5">
         <div className="container mx-auto text-center">
-          <p>&copy; {new Date().getFullYear()} Autodrop. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} DDrop. All rights reserved.</p>
         </div>
       </footer>
     </div>
