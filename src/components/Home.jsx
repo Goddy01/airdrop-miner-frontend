@@ -295,7 +295,7 @@ export default function Homepage() {
       />
 
       {/* Hero Section */}
-      <header id="hero" className="relative min-h-screen flex flex-col items-center container mx-auto text-center overflow-hidden px-3 pt-[18vh]">
+      <header id="hero" className="relative min-h-screen flex flex-col items-center container mx-auto text-center overflow-hidden px-3 pt-[18vh] py-[20rem]">
         {/* Globe with moving crypto icons */}
         <div className="relative w-64 h-64 mb-8 py-3">
           <div className="absolute inset-0"></div>
@@ -347,7 +347,7 @@ export default function Homepage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Activate All Your Airdrop Mining with Just One Click!
+          Activate All Airdrop Mining in One Click!
         </motion.h1>
         <motion.p
           className="text-lg md:text-xl mb-8"
