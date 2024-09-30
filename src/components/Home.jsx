@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTelegram, faTwitter, faMedium, faBitcoin, faEthereum } from '@fortawesome/free-brands-svg-icons';
 import { faRocket, faChartLine, faCog, faUsers, faCoins, faCube, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import PricingSection from './Pricing';
+
 
 export default function Homepage() {
   const [icons, setIcons] = useState([]);
@@ -183,13 +185,15 @@ export default function Homepage() {
 
       </section>
 
+
+      <PricingSection />
+
       {/* Footer */}
       <footer className="bg-gray-900 bg-opacity-75 items-center p-5">
         <div className="container mx-auto text-center">
             <p>&copy; {new Date().getFullYear()} Autodrop. All rights reserved.</p>
         </div>
       </footer>
-
     </div>
   );
 }
