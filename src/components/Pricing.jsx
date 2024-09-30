@@ -69,7 +69,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900 py-20 min-h-screen flex flex-col justify-center align-center">
+    <section className="bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900 py-20 min-h-screen flex flex-col justify-center align-center" id='pricing'>
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-white mb-12">Pricing & Plan</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

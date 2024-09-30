@@ -2,16 +2,209 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTelegram, faTwitter, faMedium, faBitcoin, faEthereum } from '@fortawesome/free-brands-svg-icons';
-import { faRocket, faChartLine, faCog, faUsers, faCoins, faCube, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faRocket, faChartLine, faCog, faUsers, faCoins, faCube, faBars, faTimes, faXmark } from '@fortawesome/free-solid-svg-icons';
 import PricingSection from './Pricing';
 
+const LoginModal = ({ isOpen, onClose, onSwitchToSignup }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle login logic here
+    console.log('Login attempted with:', email, password);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            className="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full mx-5 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-2 right-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <FontAwesomeIcon icon={faXmark} size="lg" />
+            </button>
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Login</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder='Email Address'
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder='Password'
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                />
+              </div>
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300">
+                Login
+              </button>
+            </form>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-400">Or login with</p>
+              <button className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                <FontAwesomeIcon icon={faTelegram} className="mr-2" />
+                Telegram
+              </button>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-400">
+                Don't have an account?{' '}
+                <button onClick={onSwitchToSignup} className="text-yellow-400 hover:underline">
+                  Sign up
+                </button>
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const SignupModal = ({ isOpen, onClose, onSwitchToLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle signup logic here
+    console.log('Signup attempted with:', email, password);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            className="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full mx-5 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-2 right-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <FontAwesomeIcon icon={faXmark} size="lg" />
+            </button>
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Sign Up</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder='Email Address'
+                  id="signup-email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder='Password'
+                  id="signup-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder='Confirm Password'
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  required
+                />
+              </div>
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-md transition duration-300">
+                Sign Up
+              </button>
+            </form>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-400">Or sign up with</p>
+              <button className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                <FontAwesomeIcon icon={faTelegram} className="mr-2" />
+                Telegram
+              </button>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-400">
+                Already have an account?{' '}
+                <button onClick={onSwitchToLogin} className="text-yellow-400 hover:underline">
+                  Log in
+                </button>
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 export default function Homepage() {
   const [icons, setIcons] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
+    setIsSignupModalOpen(false);
+    setIsOpen(false);
+  };
+
+  const openSignupModal = () => {
+    setIsSignupModalOpen(true);
+    setIsLoginModalOpen(false);
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -32,15 +225,15 @@ export default function Homepage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
-      <nav className="bg-gray-900 bg-opacity-75 p-4">
+      <nav className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-100 p-4 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <a href="/" className="text-2xl font-bold text-yellow-400">Autodrop</a>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-4 font-semibold">
-            <a href="#features" className="hover:text-yellow-400 transition-colors px-4 py-2">Features</a>
-            <a href="#about" className="hover:text-yellow-400 transition-colors px-4 py-2">About</a>
-            <a href="/login" className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors">Login</a>
+            <a href="#features-about" className="hover:text-yellow-400 transition-colors px-4 py-2">Why Choose Us?</a>
+            <a href="#pricing" className="hover:text-yellow-400 transition-colors px-4 py-2">Pricing</a>
+            <button onClick={openLoginModal} className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors">Login</button>
           </div>
 
           {/* Hamburger Menu Icon */}
@@ -49,42 +242,60 @@ export default function Homepage() {
             onClick={toggleMenu}
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
-            <FontAwesomeIcon icon={isOpen ? '' : faBars} size="lg" />
+            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} size="lg" />
           </button>
         </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
-        {isOpen && (
+          {isOpen && (
             <motion.div
-            initial={{ opacity: 0, x: 300 }}  // Start off-screen to the right
-            animate={{ opacity: 1, x: 0 }}     // Slide in
-            exit={{ opacity: 0, x: 300 }}       // Slide out to the right
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 right-0 w-64 h-full bg-gray-900 bg-opacity-75 shadow-lg md:hidden z-50" // Make sure it's fixed and on top
+              initial={{ opacity: 0, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 300 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-0 right-0 w-64 h-full bg-gray-900 bg-opacity-100 shadow-lg md:hidden z-50"
             >
-            {/* Close button should be on the menu */}
-            <button 
-                className="absolute top-4 right-4 text-yellow-400" // Positioning the close button
+              <button 
+                className="absolute top-4 right-4 text-yellow-400"
                 onClick={toggleMenu}
                 aria-label="Close menu"
-            >
+              >
                 <FontAwesomeIcon icon={faTimes} size="lg" />
-            </button>
+              </button>
 
-            <div className="flex flex-col items-center space-y-4 py-16"> {/* Added padding to center items */}
-                <a href="#features" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Features</a>
-                <a href="#about" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>About</a>
-                <a href="/login" className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors" onClick={toggleMenu}>Login</a>
-            </div>
+              <div className="flex flex-col items-center space-y-4 py-16">
+                <a href="#features-about" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Why Choose Us?</a>
+                <a href="#pricing" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Pricing</a>
+                <button onClick={openLoginModal} className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors">Login</button>
+              </div>
             </motion.div>
-        )}
+          )}
         </AnimatePresence>
-
       </nav>
 
+      {/* Login Modal */}
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        onClose={() => setIsLoginModalOpen(false)} 
+        onSwitchToSignup={() => {
+          setIsLoginModalOpen(false);
+          setIsSignupModalOpen(true);
+        }}
+      />
+
+      {/* Signup Modal */}
+      <SignupModal 
+        isOpen={isSignupModalOpen} 
+        onClose={() => setIsSignupModalOpen(false)} 
+        onSwitchToLogin={() => {
+          setIsSignupModalOpen(false);
+          setIsLoginModalOpen(true);
+        }}
+      />
+
       {/* Hero Section */}
-      <header className="relative min-h-screen flex flex-col items-center container mx-auto text-center overflow-hidden px-3 pt-[18vh]">
+      <header id="hero" className="relative min-h-screen flex flex-col items-center container mx-auto text-center overflow-hidden px-3 pt-[18vh]">
         {/* Globe with moving crypto icons */}
         <div className="relative w-64 h-64 mb-8 py-3">
           <div className="absolute inset-0"></div>
@@ -130,68 +341,67 @@ export default function Homepage() {
           ))}
         </div>
 
-        <motion.h1 
+        <motion.h1
           className="text-4xl md:text-5xl font-bold mb-4 text-yellow-400"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Reactivate Your Crypto Airdrops
+          Activate All Your Airdrop Mining with Just One Click!
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="text-lg md:text-xl mb-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Automate and manage your Telegram airdrop mini-apps with ease
+          Automate your airdrop activation effortlessly and boost your crypto rewards instantly!
         </motion.p>
-        <motion.a 
-          href="/login" 
+
+        <motion.button 
+          onClick={openSignupModal}
           className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-full text-lg transition-colors inline-flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <FontAwesomeIcon icon={faRocket} className="mr-2" />
           Get Started
-        </motion.a>
+        </motion.button>
       </header>
 
       {/* Combined Features and About Section */}
-      <section id="features-about" className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-12 px-5">
+      <section id="features-about" className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-12 px-5 py-[7rem]">
         <div className="container mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold mb-8 text-yellow-400">Why Choose Us</h2>
           <p className="text-center max-w-2xl mx-auto mb-12 text-lg">
-            Our platform simplifies the process of managing and reactivating Telegram airdrop mini-apps, helping you stay ahead in the dynamic world of airdrops.
+            Our platform simplifies the process of managing and activating Telegram airdrop mini-apps, helping you stay ahead in the dynamic world of airdrops.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8 container mx-auto">
-            <FeatureCard 
-                icon={faChartLine}
-                title="Unlock Your Earning Potential" 
-                description="Discover innovative airdrop strategies that boost your earnings and keep you ahead of the game!"
-            />
-            <FeatureCard 
-                icon={faCog}
-                title="Effortless Automation" 
-                description="Sit back and relax! Our automated solutions ensure your airdrops are managed seamlessly while you focus on what matters."
-            />
-            <FeatureCard 
-                icon={faUsers}
-                title="Streamlined Airdrop Management" 
-                description="Simplify your airdrop processes with our platform, designed to automate and enhance your experience with Telegram mini-apps."
-            />
+          <FeatureCard 
+            icon={faCog}
+            title="Effortless Automation" 
+            description="Sit back and relax! Our automated solutions ensure your airdrops are managed seamlessly while you focus on what matters."
+          />
+          <FeatureCard 
+            icon={faChartLine}
+            title="Unlock Your Earning Potential" 
+            description="Discover innovative airdrop strategies that boost your earnings and keep you ahead of the game!"
+          />
+          <FeatureCard 
+            icon={faUsers}
+            title="Streamlined Airdrop Management" 
+            description="Simplify your airdrop processes with our platform, designed to automate and enhance your experience with Telegram mini-apps."
+          />
         </div>
-
       </section>
-
 
       <PricingSection />
 
       {/* Footer */}
       <footer className="bg-gray-900 bg-opacity-75 items-center p-5">
         <div className="container mx-auto text-center">
-            <p>&copy; {new Date().getFullYear()} Autodrop. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Autodrop. All rights reserved.</p>
         </div>
       </footer>
     </div>
