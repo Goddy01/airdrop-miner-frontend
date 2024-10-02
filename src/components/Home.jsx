@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTelegram, faTwitter, faMedium, faBitcoin, faEthereum } from '@fortawesome/free-brands-svg-icons';
-import { faRocket, faChartLine, faCog, faUsers, faCoins, faCube, faBars, faTimes, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram, faBitcoin, faEthereum } from '@fortawesome/free-brands-svg-icons';
+import { faRocket, faChartLine, faCog, faUsers, faCoins, faCube, faXmark, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import PricingSection from './Pricing';
 
 const LoginModal = ({ isOpen, onClose, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const loginUser = (e) => {
     e.preventDefault();
     // Handle login logic here
     console.log('Login attempted with:', email, password);
   };
+
 
   return (
     <AnimatePresence>
@@ -40,7 +42,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToSignup }) => {
               <FontAwesomeIcon icon={faXmark} size="lg" />
             </button>
             <h2 className="text-2xl font-bold mb-4 text-yellow-400">Login</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={loginUser}>
               <div className="mb-4">
                 <input
                   type="email"
@@ -94,10 +96,10 @@ const SignupModal = ({ isOpen, onClose, onSwitchToLogin }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const signUpUser = (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log('Signup attempted with:', email, password);
+    // Handle sign up logic here
+    console.log('Sign attempted with:', email, password);
   };
 
   return (
@@ -125,7 +127,7 @@ const SignupModal = ({ isOpen, onClose, onSwitchToLogin }) => {
               <FontAwesomeIcon icon={faXmark} size="lg" />
             </button>
             <h2 className="text-2xl font-bold mb-4 text-yellow-400">Sign Up</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={signUpUser}>
               <div className="mb-4">
                 <input
                   type="email"
@@ -185,28 +187,10 @@ const SignupModal = ({ isOpen, onClose, onSwitchToLogin }) => {
   );
 };
 
-export default function Homepage() {
+export default function Homepage(props) {
   const [icons, setIcons] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true);
-    setIsSignupModalOpen(false);
-    setIsOpen(false);
-  };
-
-  const openSignupModal = () => {
-    setIsSignupModalOpen(true);
-    setIsLoginModalOpen(false);
-    setIsOpen(false);
-  };
-
+  
+  const {toggleMenu, isOpen, setIsOpen, isLoginModalOpen, setIsLoginModalOpen, isSignupModalOpen, setIsSignupModalOpen, openLoginModal, openSignupModal} = props
   useEffect(() => {
     const cryptoIcons = [
       { icon: faBitcoin, color: '#F7931A', name: 'Bitcoin' },
@@ -231,8 +215,8 @@ export default function Homepage() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-4 font-semibold">
-            <a href="#features-about" className="hover:text-yellow-400 transition-colors px-4 py-2">Why Choose Us?</a>
-            <a href="#pricing" className="hover:text-yellow-400 transition-colors px-4 py-2">Pricing</a>
+            <Link smooth to="#features-about" className="hover:text-yellow-400 transition-colors px-4 py-2">Why Choose Us?</Link>
+            <Link smooth to="#pricing" className="hover:text-yellow-400 transition-colors px-4 py-2">Pricing</Link>
             <button onClick={openLoginModal} className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors">Login</button>
           </div>
 
@@ -265,8 +249,8 @@ export default function Homepage() {
               </button>
 
               <div className="flex flex-col items-center space-y-4 py-16">
-                <a href="#features-about" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Why Choose Us?</a>
-                <a href="#pricing" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Pricing</a>
+                <Link smooth to="#features-about" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Why Choose Us?</Link>
+                <Link smooth to="#pricing" className="hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Pricing</Link>
                 <button onClick={openLoginModal} className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-full transition-colors">Login</button>
               </div>
             </motion.div>
