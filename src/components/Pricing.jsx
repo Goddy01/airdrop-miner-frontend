@@ -5,7 +5,14 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 const PricingCard = ({ title, price, features, isPopular }) => (
   <div className={`bg-gradient-to-br from-indigo-700 via-blue-800 to-purple-800 rounded-lg shadow-xl p-6 flex flex-col ${isPopular ? 'border-2 border-yellow-500' : ''}`}>
     <h3 className="text-2xl font-bold text-center text-white mb-4">{title}</h3>
-    <p className="text-center text-4xl font-bold text-yellow-300 mb-6">{price}</p>
+    <p className="text-center text-3xl font-bold text-yellow-300 mb-6 break-all">
+      {price}
+      {
+        price !== '₦0' &&
+      
+      <span className='text-base'>month</span>
+      }
+    </p>
     <ul className="flex-grow">
       {features.map((feature, index) => (
         <li key={index} className="flex items-center mb-3 text-gray-300">
@@ -44,7 +51,7 @@ const PricingSection = () => {
     },
     {
       title: "Basic",
-      price: "₦3,000/month",
+      price: "₦3,000/",
       features: [
         { text: "3-7 Airdrops", included: true },
         { text: "Priority Support", included: true },
@@ -56,7 +63,7 @@ const PricingSection = () => {
     },
     {
       title: "Pro",
-      price: "₦8,000/month",
+      price: "₦8,000/",
       features: [
         { text: "8-20 Airdrops", included: true },
         { text: "24/7 Premium Support", included: true },
